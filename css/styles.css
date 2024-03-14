@@ -13,21 +13,21 @@ justify-content: center;
    
 }
 
-img{
+/* img{
     width: 360px;
     height: 200px;
-}
+} */
 
 body{
     padding: 0;
 }
 
-img:hover, img:focus{
+/* img:hover, img:focus{
     width: 376px;
     height: 208px;
-}
+} */
 
-.gallery:hover, .gallery:focus{
+/* .gallery:hover, .gallery:focus{
     row-gap: 20px;
     column-gap: 16px;
-}
+} */

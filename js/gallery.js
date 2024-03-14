@@ -76,6 +76,8 @@ const imagesGallery = images
       src="${preview}"
       data-source="${original}"
       alt="${description}"
+      width="360"
+      height="200"
     />
   </a>
 </li>`
@@ -83,14 +85,32 @@ const imagesGallery = images
 
 gallery.insertAdjacentHTML("beforeend", imagesGallery);
 
-gallery.addEventListener("click", largePhoto)
+gallery.addEventListener("click", largePhoto);
+
 
 function largePhoto(event) {
   event.preventDefault();
-  if (event.target.nodeName !== "img") {
+  if (event.target === event.currentTarget) {
     return;
   }
   // console.log(event.target);
-  const enlargedImage = event.target.dateset.img;
-  console.log(enlargedImage);
-}
+  const enlargedImage = event.target.dataset.source;
+  // console.log(enlargedImage);
+
+  const instance = basicLightbox.create(`
+<div class="modal">
+ <img src="${enlargedImage}" alt="" width="1112" height="640" >
+ </div>
+`);
+  instance.show();
+
+  // if (event.code === "Esc") {
+    
+  }
+
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    instance.close();
+  }
+})
