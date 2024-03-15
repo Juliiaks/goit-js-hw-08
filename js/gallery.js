@@ -87,6 +87,7 @@ gallery.insertAdjacentHTML("beforeend", imagesGallery);
 
 gallery.addEventListener("click", largePhoto);
 
+let instance;
 
 function largePhoto(event) {
   event.preventDefault();
@@ -97,20 +98,26 @@ function largePhoto(event) {
   const enlargedImage = event.target.dataset.source;
   // console.log(enlargedImage);
 
-  const instance = basicLightbox.create(`
+  instance = basicLightbox.create(`
 <div class="modal">
  <img src="${enlargedImage}" alt="" width="1112" height="640" >
  </div>
-`);
+`,
+    {
+      onShow: () => {
+        document.addEventListener("keydown", onEscClick);
+      },
+      onClose: () => {
+        document.removeEventListener("keydown", onEscClick);
+      }
+    });
+  
   instance.show();
-
-  // if (event.code === "Esc") {
-    
   }
 
 
-document.addEventListener("keydown", event => {
+function onEscClick(event) {
   if (event.key === "Escape") {
     instance.close();
   }
-})
+};
